@@ -1,0 +1,42 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+}
+
+const siteName = 'Filippo Carmenati';
+const { title, description = 'Personal website of Filippo Carmenati — projects, rubricas, and writings.', bodyClass } = Astro.props;
+const fullTitle = title ? `${title} — ${siteName}` : siteName;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class={bodyClass}>
+    <header class="site-header">
+      <a class="wordmark" href="/">{siteName}</a>
+      <Nav />
+    </header>
+    <main>
+      <slot />
+    </main>
+    <aside class="site-contact" aria-label="Contact">
+      <div><a href="mailto:filippo.carmenati@gmail.com">filippo.carmenati@gmail.com</a></div>
+      <div><a href="https://www.linkedin.com/in/filippo-carmenati-5215ba1b4/">LinkedIn</a></div>
+      <div><a href="https://github.com/FrauBlucher">GitHub</a></div>
+    </aside>
+  </body>
+</html>

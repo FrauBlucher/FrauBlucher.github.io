@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCategoryIndexes, splitId } from '../../lib/writings';
+
+const categories = await getCategoryIndexes();
+---
+<BaseLayout title="Writings" description="Poetries and pages from my diaries.">
+  <h1>Writings</h1>
+
+  <p class="muted">
+    Things I want to keep — short poems and pages lifted from my diaries.
+  </p>
+
+  {categories.length === 0 ? (
+    <p><em>No categories yet. Create a folder under <code>src/content/writings/</code>.</em></p>
+  ) : (
+    <ul class="entries">
+      {categories.map(c => {
+        const { category } = splitId(c.id);
+        return (
+          <li>
+            <a href={`/writings/${category}`}>{c.data.title}</a>
+            {c.data.summary && <span class="muted">{c.data.summary}</span>}
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</BaseLayout>

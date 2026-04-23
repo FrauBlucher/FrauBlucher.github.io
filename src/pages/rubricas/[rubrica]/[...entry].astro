@@ -1,0 +1,25 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getRubricas, splitId, fmtDate } from '../../../lib/rubricas';
+
+export async function getStaticPaths() {
+  const all = await getRubricas();
+  return all
+    .filter(e => !e.data.isIndex && !e.id.endsWith('/_index'))
+    .map(e => {
+      const { rubrica, entry } = splitId(e.id);
+      return { params: { rubrica, entry }, props: { entry: e } };
+    });
+}
+
+const { rubrica } = Astro.params;
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title} description={entry.data.summary}>
+  <p><a href={`/rubricas/${rubrica}`}>← {rubrica.replace(/-/g, ' ')}</a></p>
+  <h1>{entry.data.title}</h1>
+  <p class="date">{fmtDate(entry.data.date)}</p>
+  <Content />
+</BaseLayout>

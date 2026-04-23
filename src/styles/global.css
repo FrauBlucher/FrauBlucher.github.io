@@ -1,0 +1,192 @@
+:root {
+  --bg: #f4f3ef;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --rule: #e1dcd8;
+  --accent: #1a1a1a;
+  --max-width: 720px;
+
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+  font-size: 22px;
+  text-align: justify;
+  hyphens: auto;
+  /* Vertically center content within the viewport (short pages only;
+     longer pages still scroll normally thanks to `safe center`). */
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 2rem 0 0.75rem;
+}
+
+h1 { font-size: 1.55rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.05rem; }
+
+p, ul, ol, blockquote { margin: 0 0 1rem; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--rule);
+}
+a:hover { text-decoration-color: var(--accent); }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0;
+}
+
+blockquote {
+  margin: 1.25rem 0;
+  padding: 0 1rem;
+  border-left: 2px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--rule);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--rule);
+  padding: 0.9rem 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+pre code { background: transparent; padding: 0; }
+
+img { max-width: 100%; height: auto; }
+
+.muted { color: var(--muted); }
+.date  { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+
+/* Header — full-width bar, name left, nav right */
+header.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+header.site-header .wordmark {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.1;
+}
+header.site-header .wordmark:hover { text-decoration: none; }
+
+nav.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 20px;
+}
+nav.site-nav a {
+  text-decoration: none;
+  color: var(--muted);
+}
+nav.site-nav a.active,
+nav.site-nav a:hover { color: var(--text); }
+
+/* Entry lists */
+ul.entries {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+ul.entries li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed var(--rule);
+}
+ul.entries li a {
+  text-decoration: none;
+  color: var(--text);
+}
+ul.entries li a:hover { text-decoration: underline; }
+
+/* Fixed contact block bottom-right */
+.site-contact {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.25rem;
+  font-size: 20px;
+  line-height: 1.4;
+  text-align: right;
+  color: var(--muted);
+}
+.site-contact a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.site-contact a:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+}
+.site-contact div { white-space: nowrap; }
+
+@media (max-width: 720px) {
+  /* On narrow screens, un-pin contacts and stack header vertically */
+  .site-contact {
+    position: static;
+    margin: 3rem 1.5rem 2rem;
+    text-align: center;
+    font-size: 18px;
+  }
+  header.site-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  header.site-header .wordmark { font-size: 28px; }
+  nav.site-nav { font-size: 18px; justify-content: center; }
+  main { padding-bottom: 2rem; }
+}

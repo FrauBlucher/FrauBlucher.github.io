@@ -1,0 +1,26 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getWritings, splitId } from '../../../lib/writings';
+import { fmtDate } from '../../../lib/rubricas';
+
+export async function getStaticPaths() {
+  const all = await getWritings();
+  return all
+    .filter(e => !e.data.isIndex && !e.id.endsWith('/_index'))
+    .map(e => {
+      const { category, entry } = splitId(e.id);
+      return { params: { category, entry }, props: { entry: e } };
+    });
+}
+
+const { category } = Astro.params;
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title} description={entry.data.summary}>
+  <p><a href={`/writings/${category}`}>← {category.replace(/-/g, ' ')}</a></p>
+  <h1>{entry.data.title}</h1>
+  {entry.data.date && <p class="date">{fmtDate(entry.data.date)}</p>}
+  <Content />
+</BaseLayout>

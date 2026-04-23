@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fmtDate } from '../../lib/rubricas';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Projects" description="Things I've made.">
+  <h1>Projects</h1>
+
+  <p class="muted">Things I've built, alone or with others.</p>
+
+  {projects.length === 0 ? (
+    <p><em>No projects yet. Add one in <code>src/content/projects/</code>.</em></p>
+  ) : (
+    <ul class="entries">
+      {projects.map(p => (
+        <li>
+          <a href={`/projects/${p.id}`}>{p.data.title}</a>
+          <span class="date">{fmtDate(p.data.date)}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>

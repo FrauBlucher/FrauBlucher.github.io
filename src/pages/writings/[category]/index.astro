@@ -1,0 +1,52 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  getCategoryIndexes,
+  getCategoryIndex,
+  getCategoryEntries,
+  splitId,
+} from '../../../lib/writings';
+import { fmtDate } from '../../../lib/rubricas';
+
+export async function getStaticPaths() {
+  const indexes = await getCategoryIndexes();
+  return indexes.map(idx => {
+    const { category } = splitId(idx.id);
+    return { params: { category } };
+  });
+}
+
+const { category } = Astro.params;
+const index = await getCategoryIndex(category!);
+const entries = await getCategoryEntries(category!);
+
+if (!index) {
+  return Astro.redirect('/writings');
+}
+
+const { Content } = await render(index);
+---
+<BaseLayout title={index.data.title} description={index.data.summary}>
+  <p><a href="/writings">← Writings</a></p>
+  <h1>{index.data.title}</h1>
+
+  <Content />
+
+  <h2>Entries</h2>
+  {entries.length === 0 ? (
+    <p><em>No entries yet in this category.</em></p>
+  ) : (
+    <ul class="entries">
+      {entries.map(e => {
+        const { entry } = splitId(e.id);
+        return (
+          <li>
+            <a href={`/writings/${category}/${entry}`}>{e.data.title}</a>
+            <span class="date">{fmtDate(e.data.date)}</span>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getRubricaIndexes, splitId } from '../../lib/rubricas';
+
+const indexes = await getRubricaIndexes();
+---
+<BaseLayout title="Unusual Rubricas" description="Recurring themes from my diaries.">
+  <h1>Unusual Rubricas</h1>
+
+  <p class="muted">
+    Rubricas are recurring themes I track in my diaries — collections of questions,
+    people, and things worth paying attention to.
+  </p>
+
+  {indexes.length === 0 ? (
+    <p><em>No rubricas yet. Create a folder under <code>src/content/rubricas/</code>.</em></p>
+  ) : (
+    <ul class="entries">
+      {indexes.map(idx => {
+        const { rubrica } = splitId(idx.id);
+        return (
+          <li>
+            <a href={`/rubricas/${rubrica}`}>{idx.data.title}</a>
+            {idx.data.summary && <span class="muted">{idx.data.summary}</span>}
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</BaseLayout>
