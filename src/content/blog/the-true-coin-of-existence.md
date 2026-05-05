@@ -2,7 +2,7 @@
 title: "The true coin of existence"
 date: 2026-04-29
 tags: ["reflections"]
-summary: "On a Sihl-side bench, watching a cormorant fish, the slow leaves, and the energetic ledger of life."
+summary: "While looking at the slow flowing of the Sihl I watched a cormorant fishing..."
 featured: true
 heroImage: "/images/cormorant.jpg"
 heroAlt: "A cormorant standing in shallow water with a freshly caught fish in its beak"

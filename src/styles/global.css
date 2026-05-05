@@ -248,6 +248,26 @@ body.home main .home-list li {
   min-width: 0;
 }
 
+/* Rubricas index ("Unusual Rubricas") */
+body.rubricas-index main {
+  text-align: left;
+  hyphens: manual;
+  display: block;
+  min-height: 0;
+  font-size: 18px;
+}
+body.rubricas-index main h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem;
+}
+body.rubricas-index main p,
+body.rubricas-index main li,
+body.rubricas-index main .rubricas-caption {
+  font-size: 18px;
+  line-height: 1.55;
+}
+
 /* Rubrica gallery (Lost mentors) — masonry grid with hover overlay */
 body.rubrica-gallery main {
   max-width: 1100px;
@@ -400,6 +420,93 @@ body.featured-entry .featured-body blockquote {
 @media (max-width: 720px) {
   body.featured-entry .featured-hero img { max-height: 320px; }
   body.featured-entry main { padding: 1.5rem 1rem 3rem; }
+}
+
+/* Blog entry (non-featured) — PDF-like typography */
+body.blog-entry main {
+  max-width: 760px;
+  text-align: left;
+  hyphens: manual;
+  display: block;
+  min-height: 0;
+  padding: 2rem 1.5rem 5rem;
+  font-size: 16px;
+}
+body.blog-entry .back-link {
+  margin: 0 0 1rem;
+  font-size: 15px;
+}
+body.blog-entry h1.post-title {
+  font-family: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  margin: 0.5rem 0 0.35rem;
+}
+body.blog-entry .post-subtitle {
+  font-family: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--text);
+  margin: 0 0 0.85rem;
+}
+body.blog-entry .date {
+  font-family: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  margin: 0 0 1.75rem;
+}
+body.blog-entry .post-body {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.6;
+}
+body.blog-entry .post-body p,
+body.blog-entry .post-body ul,
+body.blog-entry .post-body ol,
+body.blog-entry .post-body blockquote {
+  margin: 0 0 1rem;
+  font-size: 16px;
+}
+body.blog-entry .post-body figure {
+  margin: 1.5rem auto;
+  text-align: center;
+}
+body.blog-entry .post-body figure img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+body.blog-entry .post-body figcaption {
+  margin: 0.6rem auto 0;
+  font-family: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+  text-align: left;
+  max-width: 95%;
+}
+body.blog-entry .post-body figcaption strong {
+  color: var(--text);
+  font-weight: 700;
+}
+body.blog-entry .post-body ol.references {
+  font-size: 14px;
+  line-height: 1.5;
+}
+body.blog-entry .post-body ol.references li {
+  margin-bottom: 0.45rem;
+}
+@media (max-width: 720px) {
+  body.blog-entry main { padding: 1.5rem 1rem 3rem; }
+  body.blog-entry h1.post-title { font-size: 26px; }
+  body.blog-entry .post-subtitle { font-size: 21px; }
+  body.blog-entry .post-body figure img { max-height: 240px; }
 }
 
 /* Blog index — Gundersen-inspired: minimal, chronological, tag cloud on top */
